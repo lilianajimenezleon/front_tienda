@@ -1,0 +1,61 @@
+<div class="container d-flex justify-content-center align-items-center min-vh-100 bg-light">
+    <div class="card shadow-lg p-4" style="width: 100%; max-width: 400px;">
+        <div class="card-body">
+            <h3 class="card-title text-center mb-4 text-primary">
+                <i class="bi bi-shop me-2"></i>Tienda App
+            </h3>
+            <h5 class="text-center mb-4 text-muted">Iniciar Sesión</h5>
+
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                    <label for="usuario" class="form-label">Usuario</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                        <input type="text" formControlName="usuario" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f['usuario'].errors }"
+                            placeholder="Ingrese su usuario" />
+                        <div *ngIf="submitted && f['usuario'].errors" class="invalid-feedback">
+                            <div *ngIf="f['usuario'].errors['required']">El usuario es requerido</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="contraseña" class="form-label">Contraseña</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                        <input type="password" formControlName="contraseña" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f['contraseña'].errors }"
+                            placeholder="Ingrese su contraseña" />
+                        <div *ngIf="submitted && f['contraseña'].errors" class="invalid-feedback">
+                            <div *ngIf="f['contraseña'].errors['required']">La contraseña es requerida</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+
+                <div *ngIf="loading" class="alert alert-info mt-3 mb-0">
+                    <i class="bi bi-hourglass-split me-2"></i>
+                    <strong>Conectando al servidor...</strong><br>
+                    <small>Si es la primera vez en un tiempo, el servidor puede tardar hasta 60 segundos en iniciar
+                        (plan gratuito).</small>
+                </div>
+
+                <div class="d-grid gap-2 mt-4">
+                    <button [disabled]="loading" class="btn btn-primary btn-lg" type="submit">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+                        <span *ngIf="!loading">Ingresar</span>
+                        <span *ngIf="loading">Conectando...</span>
+                    </button>
+                    <a routerLink="/register" class="btn btn-outline-primary">
+                        <i class="bi bi-person-plus me-2"></i>Registrar Nueva Tienda
+                    </a>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer text-center bg-white border-0 mt-3">
+            <small class="text-muted">Sistema de Inventario v1.0</small>
+        </div>
+    </div>
+</div>

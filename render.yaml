@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: front-tienda
+    env: node
+    buildCommand: npm install && npm run build -- --configuration production
+    startCommand: npm run start:prod
+    envVars:
+      - key: NODE_ENV
+        value: production

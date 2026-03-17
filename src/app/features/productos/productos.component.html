@@ -1,0 +1,56 @@
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="bi bi-box-seam me-2"></i>Productos</h2>
+        <button class="btn btn-primary" routerLink="/productos/nuevo">
+            <i class="bi bi-plus-circle me-2"></i>Nuevo Producto
+        </button>
+    </div>
+
+    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+
+    <div *ngIf="loading" class="text-center">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Cargando...</span>
+        </div>
+    </div>
+
+    <div *ngIf="!loading" class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Precio Venta</th>
+                            <th>Stock</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let producto of productos">
+                            <td>{{producto.codigoProducto}}</td>
+                            <td>{{producto.nombreProducto}}</td>
+                            <td>{{producto.precioVenta | currency}}</td>
+                            <td>
+                                <span [class.text-danger]="producto.stockActual <= producto.stockMinimo">
+                                    {{producto.stockActual}}
+                                </span>
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary me-2"
+                                    [routerLink]="['/productos', producto.idProducto]">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger"
+                                    (click)="deleteProducto(producto.idProducto)">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
