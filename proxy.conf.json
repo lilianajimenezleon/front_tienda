@@ -1,6 +1,6 @@
 {
     "/api": {
-        "target": "https://back-tienda-jyt2.onrender.com",
+        "target": "https://back-tienda-eo7k.onrender.com",
         "secure": true,
         "changeOrigin": true
     }
