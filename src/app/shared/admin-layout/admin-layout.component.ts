@@ -56,11 +56,6 @@ import { AuthService } from '../../core/services/auth.service';
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" routerLink="/admin/categorias">
-              <i class="bi bi-tags me-2"></i>Categorías
-            </a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link text-white" routerLink="/admin/reportes">
               <i class="bi bi-graph-up me-2"></i>Reportes Globales
             </a>

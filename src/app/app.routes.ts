@@ -35,7 +35,6 @@ export const routes: Routes = [
             { path: 'tiendas/:id', loadComponent: () => import('./features/admin/admin-tienda-form.component').then(m => m.AdminTiendaFormComponent) },
             { path: 'productos', loadComponent: () => import('./features/admin/admin-productos.component').then(m => m.AdminProductosComponent) },
             { path: 'reportes', loadComponent: () => import('./features/admin/admin-reportes.component').then(m => m.AdminReportesComponent) },
-            { path: 'categorias', loadComponent: () => import('./features/admin/admin-categorias.component').then(m => m.AdminCategoriasComponent) },
             { path: 'proveedores', loadComponent: () => import('./features/admin/admin-proveedores.component').then(m => m.AdminProveedoresComponent) },
             { path: 'ventas', loadComponent: () => import('./features/admin/admin-ventas.component').then(m => m.AdminVentasComponent) },
             { path: 'compras', loadComponent: () => import('./features/admin/admin-compras.component').then(m => m.AdminComprasComponent) },
@@ -59,6 +58,7 @@ export const routes: Routes = [
             { path: 'compras', component: ComprasComponent },
             { path: 'compras/nueva', component: CompraFormComponent },
             { path: 'compras/:id', component: CompraFormComponent },
+            { path: 'mermas', loadComponent: () => import('./features/mermas/mermas.component').then(m => m.MermasComponent) },
             { path: 'cambiar-password', component: ChangePasswordComponent },
             { path: '', redirectTo: 'reportes', pathMatch: 'full' }
         ]

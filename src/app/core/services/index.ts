@@ -6,3 +6,4 @@ export * from './reporte.service';
 export * from './tienda.service';
 export * from './user.service';
 export * from './venta.service';
+export * from './merma.service';
