@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../core/services';
 import { first } from 'rxjs/operators';
 
@@ -17,12 +18,17 @@ export class LoginComponent implements OnInit {
     loading = false;
     submitted = false;
     error = '';
+    weather: any = null;
+    weatherError = false;
+    ciudad = 'Bogota';
+    editandoCiudad = false;
 
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private authService: AuthService
+        private authService: AuthService,
+        private http: HttpClient
     ) {
         // redirect to home if already logged in
         if (this.authService.currentUserValue) {
@@ -35,6 +41,23 @@ export class LoginComponent implements OnInit {
             usuario: ['', Validators.required],
             contraseña: ['', Validators.required]
         });
+        this.ciudad = localStorage.getItem('weather_city') || 'Bogota';
+        this.cargarClima();
+    }
+
+    cargarClima() {
+        this.http.get<any>(`https://wttr.in/${this.ciudad}?format=j1`).subscribe({
+            next: (data) => { this.weather = data; },
+            error: () => { this.weatherError = true; }
+        });
+    }
+
+    cambiarCiudad(nueva: string) {
+        if (!nueva.trim()) return;
+        this.ciudad = nueva.trim();
+        localStorage.setItem('weather_city', this.ciudad);
+        this.editandoCiudad = false;
+        this.cargarClima();
     }
 
     // convenience getter for easy access to form fields

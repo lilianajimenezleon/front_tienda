@@ -1,4 +1,23 @@
-<div class="container d-flex justify-content-center align-items-center min-vh-100 bg-light">
+<div class="container position-relative d-flex justify-content-center align-items-center min-vh-100 bg-light">
+    <!-- Weather -->
+    <div class="position-absolute bottom-0 end-0 m-3 text-center text-muted small" *ngIf="weather">
+        <span>{{ weather.current_condition?.[0]?.temp_C || '?' }}°C</span>
+        <span class="mx-1">|</span>
+        <span>{{ weather.current_condition?.[0]?.weatherDesc?.[0]?.value || '' }}</span>
+        <br>
+        <ng-container *ngIf="!editandoCiudad; else editCity">
+            <span role="button" class="text-decoration-underline cursor-pointer" (click)="editandoCiudad = true">
+                {{ ciudad }}
+            </span>
+        </ng-container>
+        <ng-template #editCity>
+            <input #cityInput type="text" [value]="ciudad" class="form-control form-control-sm d-inline-block"
+                style="width:100px" (blur)="cambiarCiudad(cityInput.value)"
+                (keydown.enter)="cambiarCiudad(cityInput.value)" (keydown.escape)="editandoCiudad = false" autofocus />
+        </ng-template>
+    </div>
+
+    <!-- Login -->
     <div class="card shadow-lg p-4" style="width: 100%; max-width: 400px;">
         <div class="card-body">
             <h3 class="card-title text-center mb-4 text-primary">
