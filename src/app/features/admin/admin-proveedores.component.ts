@@ -234,11 +234,19 @@ export class AdminProveedoresComponent implements OnInit {
 
   cargarProveedores() {
     this.loading = true;
-    // El backend no tiene endpoint global de proveedores
-    // Por ahora dejamos vacío
-    this.proveedores = [];
-    this.proveedoresFiltrados = [];
-    this.loading = false;
+    this.http.get<any[]>(`${environment.apiUrl}/proveedores`).subscribe({
+      next: (data) => {
+        this.proveedores = data.map(p => ({ ...p, estado: Number(p.estado) }));
+        this.proveedoresFiltrados = this.proveedores;
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error cargando proveedores', error);
+        this.proveedores = [];
+        this.proveedoresFiltrados = [];
+        this.loading = false;
+      }
+    });
   }
 
   filtrar() {

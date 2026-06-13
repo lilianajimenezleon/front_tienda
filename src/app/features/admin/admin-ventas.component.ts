@@ -128,9 +128,12 @@ export class AdminVentasComponent implements OnInit {
   }
 
   cargarVentas() {
-    // El backend no tiene endpoint global de ventas
-    // Requeriría implementación en el backend
-    this.ventas = [];
+    this.http.get<any[]>(`${environment.apiUrl}/ventas`).subscribe({
+      next: (data) => {
+        this.ventas = data;
+      },
+      error: (error) => console.error('Error cargando ventas', error)
+    });
   }
 
   buscar() {
