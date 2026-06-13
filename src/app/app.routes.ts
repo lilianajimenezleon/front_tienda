@@ -59,6 +59,7 @@ export const routes: Routes = [
             { path: 'compras/nueva', component: CompraFormComponent },
             { path: 'compras/:id', component: CompraFormComponent },
             { path: 'mermas', loadComponent: () => import('./features/mermas/mermas.component').then(m => m.MermasComponent) },
+            { path: 'proveedores', loadComponent: () => import('./features/proveedores/proveedores.component').then(m => m.ProveedoresComponent) },
             { path: 'cambiar-password', component: ChangePasswordComponent },
             { path: '', redirectTo: 'reportes', pathMatch: 'full' }
         ]

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -148,9 +148,12 @@ export class AdminMermasComponent implements OnInit {
   }
 
   cargarMermas() {
-    // El backend no tiene endpoint global de mermas
-    // Requeriría implementación
-    this.mermas = [];
+    this.http.get<any[]>(`${environment.apiUrl}/mermas`).subscribe({
+      next: (data) => {
+        this.mermas = data;
+      },
+      error: (error) => console.error('Error cargando mermas', error)
+    });
   }
 
   buscar() {
