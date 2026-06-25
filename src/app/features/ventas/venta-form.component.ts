@@ -299,6 +299,7 @@ export class VentaFormComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.loading) return;
     this.submitted = true;
 
     if (this.form.invalid || this.detalles.length === 0) {

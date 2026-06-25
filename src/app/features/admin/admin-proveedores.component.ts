@@ -124,7 +124,6 @@ interface Tienda {
                   <th>Contacto</th>
                   <th>Tienda</th>
                   <th>Estado</th>
-                  <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -153,19 +152,9 @@ interface Tienda {
                       {{ proveedor.estado === 0 ? 'ACTIVO' : 'INACTIVO' }}
                     </span>
                   </td>
-                  <td>
-                    <div class="btn-group btn-group-sm">
-                      <button class="btn btn-outline-warning" (click)="cambiarEstado(proveedor)" title="Cambiar estado">
-                        <i class="bi bi-power"></i>
-                      </button>
-                      <button class="btn btn-outline-danger" (click)="eliminar(proveedor)" title="Eliminar">
-                        <i class="bi bi-trash"></i>
-                      </button>
-                    </div>
-                  </td>
                 </tr>
                 <tr *ngIf="proveedoresFiltrados.length === 0">
-                  <td colspan="6" class="text-center text-muted py-4">
+                  <td colspan="5" class="text-center text-muted py-4">
                     No se encontraron proveedores
                   </td>
                 </tr>
@@ -287,25 +276,6 @@ export class AdminProveedoresComponent implements OnInit {
         this.loading = false;
       }
     });
-  }
-
-  cambiarEstado(proveedor: Proveedor) {
-    // La funcionalidad de cambio de estado requiere endpoint específico
-    alert('Funcionalidad de cambio de estado pendiente');
-  }
-
-  eliminar(proveedor: Proveedor) {
-    if (confirm(`¿Eliminar el proveedor "${proveedor.nombreProveedor}"?`)) {
-      this.http.delete(`${environment.apiUrl}/proveedores/${proveedor.idProveedor}`).subscribe({
-        next: () => {
-          this.cargarProveedores();
-        },
-        error: (error) => {
-          console.error('Error eliminando proveedor', error);
-          alert('Error al eliminar proveedor');
-        }
-      });
-    }
   }
 
   cancelar() {
